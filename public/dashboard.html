@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Dashboard</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="card"><h2>Dashboard</h2><p id="info">Loading...</p>
+<button onclick="logout()">Logout</button></div>
+<script src="app.js"></script>
+<script>
+const token = localStorage.getItem('token');
+if(!token) location.href='login.html';
+api('/me','GET',null,token).then(r=>{
+  if(!r.ok){ localStorage.removeItem('token'); location.href='login.html'; }
+  else info.textContent = 'Welcome ' + r.user.name + ' (' + r.user.email + ')';
+});
+function logout(){ localStorage.removeItem('token'); location.href='login.html'; }
+</script></body></html>

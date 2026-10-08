@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card">
+      <h2>Sign Up</h2>
+      <input id="name" placeholder="Name" /><input
+        id="email"
+        type="email"
+        placeholder="Email"
+      />
+      <input id="password" type="password" placeholder="Password (min 6)" />
+      <button onclick="go()">Sign Up</button>
+      <div class="links">
+        <a href="login.html">Pehle se account hai? Login</a>
+      </div>
+      <div id="msg"></div>
+    </div>
+    <script src="app.js"></script>
+
+    <script>
+      async function go() {
+        const userName = document.getElementById("name").value.trim();
+        const userEmail = document.getElementById("email").value.trim();
+        const userPassword = document.getElementById("password").value;
+
+        console.log("Name:", userName);
+        console.log("Email:", userEmail);
+
+        const r = await api("/signup", "POST", {
+          name: userName,
+          email: userEmail,
+          password: userPassword,
+        });
+
+        show(r);
+
+        if (r.ok) {
+          localStorage.setItem("token", r.token);
+          setTimeout(() => {
+            location.href = "dashboard.html";
+          }, 800);
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<!-- <script>
+async function go(){
+  const r = await api('/signup','POST',{name:name.value,email:email.value,password:password.value});
+  show(r);
+  if(r.ok){ localStorage.setItem('token', r.token); setTimeout(()=>location.href='dashboard.html',800); }
+}
+</script> -->

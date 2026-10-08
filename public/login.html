@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Login</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="card"><h2>Login</h2>
+<input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Password">
+<button onclick="go()">Login</button>
+<div class="links"><a href="signup.html">Sign Up</a><a href="forgot.html">Password bhool gaye?</a></div><div id="msg"></div></div>
+<script src="app.js"></script>
+<script>
+async function go(){
+  const r = await api('/login','POST',{email:email.value,password:password.value});
+  show(r);
+  if(r.ok){ localStorage.setItem('token', r.token); setTimeout(()=>location.href='dashboard.html',800); }
+}
+</script></body></html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Forgot Password</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="card"><h2>Forgot Password</h2>
+<input id="email" type="email" placeholder="Apni registered email likhein">
+<button onclick="go()">Reset Link Bhejein</button>
+<div class="links"><a href="login.html">Wapas Login</a></div><div id="msg"></div></div>
+<script src="app.js"></script>
+<script>
+async function go(){ show(await api('/forgot-password','POST',{email:email.value})); }
+</script></body></html>

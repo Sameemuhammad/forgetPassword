@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Reset Password</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="card"><h2>Naya Password</h2>
+<input id="password" type="password" placeholder="Naya password (min 6)">
+<input id="confirm" type="password" placeholder="Password dobara likhein">
+<button onclick="go()">Password Change Karein</button>
+<div class="links"><a href="login.html">Login</a></div><div id="msg"></div></div>
+<script src="app.js"></script>
+<script>
+async function go(){
+  if(password.value !== confirm.value) return show({ok:false,message:'Dono passwords match nahi karte'});
+  const token = new URLSearchParams(location.search).get('token');
+  const r = await api('/reset-password/' + token,'POST',{password:password.value});
+  show(r);
+  if(r.ok) setTimeout(()=>location.href='login.html',1500);
+}
+</script></body></html>
